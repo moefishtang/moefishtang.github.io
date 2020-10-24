@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head><title>via</title></head>
+<style>
+input{font-size:30pt;outline:none;}
+#ale{
+display:none;
+position:absolute;
+padding:20px;
+border-radius:5px;
+width:20%;
+background:#C62828;
+color:white;
+top:80%;
+left:40%;
+font-size:20pt;
+}
+a{text-decoration:none;color:white;}
+#id1{
+position:absolute;
+top:0;
+left:0;
+overflow:hidden;
+height:100vh;
+width:100vw;
+}
+#id11{
+width:98%;
+height:7%;
+}
+#id2{
+display:none;
+background:black;
+position:fixed;
+font-size:350%;
+color:white;
+top:87%;
+left:0;
+height:13%;
+width:100%;
+}
+#id3{
+background:rgba(0,0,0,0.57);
+position:absolute;
+top:0;
+left:-20%;
+height:100%;
+width:20%;
+overflow:scroll;
+transition:left 0.1s;
+}
+#id4{
+background:rgba(0,0,0,0.2);
+position:absolute;
+top:0;
+left:0;
+height:100%;
+width:100%;
+transition:display 0.2s;
+display:none;
+}
+#id21{
+position:absolute;
+top:0;
+left:0;
+height:100%;
+width:83%;
+overflow:hidden;
+}
+#input{
+background:rgba(255,255,255,0.8);
+width:74%;
+padding:2%;
+margin-top:7%;
+margin-left:11%;
+margin-right:11%;
+border-radius:5px;
+box-shadow:3px 3px 15px #dddddd;
+}
+#input_text{
+background:rgba(0,0,0,0);
+width:100%;
+border:0;
+height:7vw
+}
+.add{
+margin:1.5%;
+}
+#clock{
+font-size:900%;
+color:white;
+font-family:clock;
+}
+@font-face {font-family: 'clock';
+src: url('clock.otf');  
+}
+#settings,#edit,#add{
+position:absolute;
+top:25%;
+left:15%;
+height:70vw;
+width:68%;
+background:white;
+padding:1%;
+border-radius:5px;
+box-shadow:3px 3px 15px #cccccc;
+display:none;
+font-size:150%;
+}
+#edit{
+overflow:scroll;
+}
+.close{
+width:20px;
+height:20px;
+padding:10px;
+margin:5px;
+background:#009688;
+border-radius:50px;
+}
+::-webkit-input-placeholder{color:#999999}
+#id12{
+width:75%;
+height:35%;
+margin:5%;
+margin-top:10%;
+overflow:hidden;
+
+}
+.pic{
+width:90%;
+border-radius:400px;
+}
+.class1{
+width:15vw;
+height:20vw;
+margin:2.5%;
+margin-bottom:0;
+text-align:center;
+font-size:180%;
+float:left;
+}
+.class2{
+width:15vw;
+position:relative;
+margin:20px;
+top:0;
+text-align:center;
+font-size:180%;
+left:0;
+}
+</style>
+<body >
+<div id="id1" align=center>
+<img id="bg" src="img/bg.png" style="z-index:-1;position:absolute;top:-20%;left:0;width:100%;">
+<div id="id11" align=right>
+<img id="dan" src="img/night.png" style="height:6vw;padding:10px;background:rgba(0,0,0,0.37);border-radius:100px;margin:5px;">
+<img src="img/setting.svg" onclick="show(d('settings'));show(d('id4'));" style="height:6vw;padding:10px;background:rgba(0,0,0,0.37);border-radius:100px;margin:5px;"></div>
+<a href="folder://"><span id="clock">00:00:00</span></a>
+<div id="input" onclick="input();">
+<input type="text" id="input_text" placeholder="请输入搜索内容…"></div>
+<div id="id12" align="left">
+</div>
+</div><div id="id2" align=right>
+<div id="id21" align=left onclick="input()">
+<span class="add" onclick="d('input_text').value+=this.innerHTML">www.</span>
+<span class="add" onclick="d('input_text').value+=this.innerHTML">/</span>
+<span class="add" onclick="d('input_text').value+=this.innerHTML">.</span>
+<span class="add" onclick="d('input_text').value+=this.innerHTML">.com</span>
+<span class="add" onclick="d('input_text').value+=this.innerHTML">.cn</span>
+<span class="add" onclick="d('input_text').value+=this.innerHTML">.net</span>
+</div>
+<span class="add" onclick="d('input_text').value='';d('input_text').focus()">✕</span>
+<span class="add" onclick="d('input_text').blur;show(d('id2'),false)">▽</span>
+</div><div id="id4" onclick="off()"></div>
+<style>
+#id31{
+position:absolute;
+top:2vw;
+left:88vw;
+width:10vw;
+height:10vw;
+background:#009688;
+border-radius:5vw;
+display:none;
+}
+#id32{
+position:absolute;
+top:14vw;
+left:88vw;
+width:10vw;
+height:10vw;
+background:#009688;
+border-radius:5vw;
+display:none;
+}
+.in_{
+width:21vw;
+font-size:20pt;
+border:0;
+border-bottom:2px solid;
+margin:1px;
+}
+#pv{
+width:20%;
+float:right;
+padding-left:5%;
+padding-right:5%;
+background:rgba(0,0,0,0.5);
+}
+#backup{
+position:absolute;
+top:105%;
+left:10%;
+width:80%;
+//height:10vw;
+background:white;
+border-radius:10px;
+box-shadow:2px 2px 10px #dddddd;
+}
+#alertinput{
+background:rgba(0,0,0,0);
+color:white;
+width:100%;
+border:0;
+}
+</style>
+<div id="id31" align=center onclick="show(d('edit'));edit()"><img src="img/edit.svg" style="height:8vw;margin:1.5vw;transform:rotate(45deg);"></div>
+<div id="id32" align=center onclick="show(d('add'));"><img src="img/cross.svg" style="width:8vw;margin:1vw;margin-top:3vw;transform:rotate(45deg);"></div>
+<div id="id3">
+</div>
+<div id="edit" align=center>
+</div>
+<div id="add" align=center>
+<img src="img/cross.svg" style="position:absolute;top:-3%;left:97%;" onclick="off()" class="close"><iframe onchange="d('pre1').href=this.src;d('add1').value=this.src" id="pre4" name="pre4" style="height:64%;width:36%;border:0;float:left" src="about:blank"></iframe>
+<div id="pv">预览<br><a target="pre4" href="about:blank" id="pre1"><img id="pre2" style="width:100%;" src="img/icons/default.png"><span id="pre3">书签</span></a></div>
+<div style="width:95%;height:30%;background:white;clear:both;border-radius:5px;box-shadow:1px 1px 10px #dddddd;">
+链接：<input value="about:blank" onchange="d('pre1').href=this.value;d('pre4').src=this.value;" placeholder="请输入书签链接" onfocus="this.select()"  type="url" id="add1" style="font-size:20pt;width:60%;border:0;border-bottom:2px solid;"><br>
+图片：<input value="img/icons/default.png" onchange="d('pre2').src=this.value" placeholder="请输入图片路径" type="url" id="add2" style="font-size:20pt;width:60%;border:0;border-bottom:2px solid;"><br>
+名字：<input value="新建书签" onchange="d('pre3').innerHTML=this.value" placeholder="请输入书签名" onfocus="this.select()"  type="text" id="add3" style="font-size:20pt;width:60%;border:0;border-bottom:2px solid;"><hr>
+<button onclick="add()" style="background:#dddddd;font-size:30pt;border:0;border-radius:5px;">确定</button></div>
+</div>
+<div id="settings">
+<img src="img/cross.svg" style="position:absolute;top:-3%;left:97%;" onclick="off()" class="close">
+背景图片: <input id="set7" placeholder="纵位移" type="number" style="border:0;border-bottom:2px solid;font-size:20pt;"><br> &ensp;<input placeholder="路径" onfocus="this.select()"  type="url" id="set1" style="font-size:20pt;width:60%;border:0;border-bottom:2px solid;"><hr>
+搜索引擎: <span onclick="d('set2').value='https://www.baidu.com/s?word='">百度</span> <span onclick="d('set2').value='https://cn.bing.com/search?q='">必应</span> <span onclick="d('set2').value='https://www.google.com.hk/search?q='">谷歌</span> <input onfocus="this.select()" type="url" id="set2" style="font-size:20pt;width:50%;border:0;border-bottom:2px solid;"><hr>
+搜索提示信息:  <input onfocus="this.select()" type="text" value="请输入搜索内容…" id="set3" style="font-size:20pt;width:50%;border:0;border-bottom:2px solid;"><hr>
+搜索框文字颜色: <input id="set4" style="width:50%;" type="color"><hr>
+标题文字: <input onfocus="this.select()" type="text" value="一句" id="set5" style="font-size:20pt;width:50%;border:0;border-bottom:2px solid;"><hr>
+时钟颜色: <input id="set6" style="width:50%;" type="color"><hr>
+<input onclick="save()" type="button" value="保存" style="padding:10px;background:#dddddd;border:0;border-radius:10px;height:10vw;width:16vw;float:right;">
+<div id="backup" align="center"><input onclick="buin()" type="button" value="导入" style="padding:10px;background:#dddddd;border:0;border-radius:10px;height:10vw;width:16vw;margin:5px;float:left;">
+<input type="button" onclick="buout()" value="导出" style="padding:20px;background:#dddddd;border:0;border-radius:10px;height:10vw;width:16vw;margin:5px;float:right;">
+<input type="button" onclick="if(confirm('你现在正在进行重置操作,是否确定')){if(confirm('再确认一次就重置')){buclear()}}" value="重置" style="padding:20px;background:#dddddd;border:0;border-radius:10px;height:10vw;width:16vw;margin:5px;">
+</div>
+</div>
+<div id="ale" align=center></div></body>
+<script>
+if(localStorage.settings==undefined)localStorage.settings="night$><$img/bg.png$><$http://www.baidu.com/s?word=$><$请输入搜索内容…$><$#000000$><$一句$><$#ffffff$><$0";
+load();
+var engines,$1;
+function load(){
+$1=localStorage.settings.split("$><$");
+d("set1").value=$1[1];d("set2").value=$1[2];d("set3").value=$1[3];d("set4").value=$1[4];d("set5").value=$1[5];d("set6").value=$1[6];d("set7").value=$1[7];
+d("bg").src=d("set1").value;
+engines=d("set2").value;
+d("input_text").setAttribute("placeholder",d("set3").value);
+d("input_text").color=d("set4").value;
+if(d("set5").value!="一句"){document.title=d("set5").value;}
+d("clock").style.color=d("set6").value;
+d("bg").style.top="-"+d("set7").value+"%";
+if(d("set6").value=="#ffffff"||d("set6").value=="#FFFFFF"||d("set6").value=="#000000"){if($1[0]=="day"){d("input").style.background="rgba(0,0,0,0.5)";d("dan").src="img/day.png";d("input").style.boxShadow="3px 3px 15px #666666";d("input_text").style.color="white";d("clock").style.color="rgba(0,0,0,0.75)";
+}else{d("input").style.background="rgba(255,255,255,0.8)";d("dan").src="img/night.png";d("input").style.boxShadow="3px 3px 15px #dddddd";d("input_text").style.color="black";d("clock").style.color="white";};}
+}
+function show($_,$__){
+if($__==undefined)$__=true;
+if($__){$_.style.display="block"}
+else{$_.style.display="none"}
+}
+function d(___){
+return document.getElementById(___);
+}
+</script>
+<script>
+function ale(____,______){
+if(______==undefined)______=2000;
+______=parseInt(______);
+if(____==undefined)____="&ensp;";
+d("ale").innerHTML=____;
+d("ale").style.display="block";
+setTimeout("d('ale').style.display='none'",______);
+}
+clock();
+function clock(){
+var $1=new Date();
+var h=$1.getHours();
+var m=$1.getMinutes();
+var s=$1.getSeconds()
+if(h<10){h="0"+h}if(m<10){m="0"+m}if(s<10){s="0"+s}
+document.getElementById("clock").innerHTML=h+":"+m+":"+s;
+setTimeout("clock()",500);
+}
+var y1;
+document.body.ontouchstart=function(){
+y1=event.changedTouches[0].clientY-50;
+}
+document.body.ontouchend=function(){
+if(event.changedTouches[0].clientY<y1)fold();
+}
+var y2,x2;
+d("id1").ontouchstart=function(){
+y2=event.changedTouches[0].clientY;
+x2=event.changedTouches[0].clientX+80;
+}
+d("id1").ontouchend=function(){
+if(event.changedTouches[0].clientX>x2&&event.changedTouches[0].clientY<(y2+100)&&event.changedTouches[0].clientY>(y2-100)){
+d("id3").style.left="0";show(d("id4"));show(d("id31"));show(d("id32"));
+}}
+function off(){
+d("id3").style.left="-20%";show(d("id4"),false);show(d("settings"),false);show(d("id31"),false);show(d("edit"),false);show(d("id32"),false);show(d("add"),false);
+}
+d("input_text").onkeypress=function(){if(event.keyCode==13){
+var str_=this.value;
+var l=str_.length;
+		if(str_.slice(0,7)!="http://"&&str_.slice(0,8)!="https://"){
+		if(str_.slice(l-4,l)==".com"||str_.slice(l-3,l)==".cn"||str_.slice(l-4,l)==".net"||str_.slice(l-4,l)==".org"||str_.slice(0,4)=="www."){str_="https://"+str_}
+		else{str_=engines+str_}}
+location.href=str_;
+}}
+function input(){
+d("input_text").focus();
+show(d("id2"));
+}
+function save(){
+localStorage.settings=$1[0]+"$><$"+d("set1").value+"$><$"+d("set2").value+"$><$"+d("set3").value+"$><$"+d("set4").value+"$><$"+d("set5").value+"$><$"+d("set6").value+"$><$"+d("set7").value;
+load();
+ale("保存成功");
+}
+function edit(){
+d("edit").innerHTML="";
+d("edit").innerHTML+="<span style='float:left;'>书签链接</span><span style='float:right;'>书签名字</span>书签图片<br>首页书签<br>";
+for (var i=0; i<$2.length; i++){
+$2_1=$2[i].split("|><|");
+d("edit").innerHTML+="<input class='in_' type='url' id='b"+i+"_1' value='"+$2_1[0]+"'><input class='in_' type='url'  id='b"+i+"_2' value='"+$2_1[1]+"'><input class='in_' type='text'  id='b"+i+"_3' value='"+$2_1[2]+"'><br>"
+}
+d("edit").innerHTML+="<br>左侧书签<br>";
+for (var i=0; i<$3.length; i++){
+$3_1=$3[i].split("|><|");
+d("edit").innerHTML+="<input class='in_' type='url' id='b"+i+"__1' value='"+$3_1[0]+"'><input class='in_' type='url'  id='b"+i+"__2' value='"+$3_1[1]+"'><input class='in_' type='text'  id='b"+i+"__3' value='"+$3_1[2]+"'><br>"
+}
+d("edit").innerHTML+="<input onclick='bms()' type='button' value='保存' style='margin:20px;padding:20px;background:#dddddd;border:0;border-radius:10px;height:10vw;width:16vw;'>"
+}
+function bms(){
+localStorage.bookmark0="";
+for (var i=0; i<$2.length; i++){
+localStorage.bookmark0+=d("b"+i+"_1").value+"|><|"+d("b"+i+"_2").value+"|><|"+d("b"+i+"_3").value;
+if(i<($2.length-1)){localStorage.bookmark0+="|)(|";}
+}
+localStorage.bookmark="";
+for (var i=0; i<$3.length; i++){
+localStorage.bookmark+=d("b"+i+"__1").value+"|><|"+d("b"+i+"__2").value+"|><|"+d("b"+i+"__3").value;
+if(i<($3.length-1)){localStorage.bookmark+="|)(|";}
+}}
+if(localStorage.bookmark0==undefined)localStorage.bookmark0="https://www.baidu.com/?from=1011440l|><|img/icons/baidu.png|><|百度一下|)(|https://www.google.com.hk/#spf=1|><|img/icons/google_app.png|><|谷歌搜索|)(|https://m.bilibili.com/index.html?bsource=bdts|><|img/icons/bilibilibog.png|><|哔哩哔哩|)(|https://m.youtube.com/|><|img/icons/youtube.png|><|youtube|)(|https://tieba.baidu.com/?page=like|><|img/icons/tieba.png|><|百度贴吧|)(|https://h5.m.taobao.com|><|img/icons/taobao.png|><|淘宝|)(|https://www.coolapk.com/|><|img/icons/cool_apk.png|><|酷安|)(|https://m.apkpure.com/cn/|><|img/icons/apkpure.png|><|apkpure";
+if(localStorage.bookmark==undefined)localStorage.bookmark="https://www.baidu.com/?from=1011440l|><|img/icons/baidu.png|><|百度一下";
+var $2,$2_1,$3,$3_1;
+$2=localStorage.bookmark0.split("|)(|");
+for (var i=0; i<$2.length; i++){
+$2_1=$2[i].split("|><|");
+d("id12").innerHTML+="<div class='class1'><a href='"+$2_1[0]+"'><img src='"+$2_1[1]+"' class='pic'>"+$2_1[2]+"</a></div>"
+}
+$3=localStorage.bookmark.split("|)(|");
+for (var i=0; i<$3.length; i++){
+$3_1=$3[i].split("|><|");
+d("id3").innerHTML+="<div class='class2'><a href='"+$3_1[0]+"'><img src='"+$3_1[1]+"' class='pic'>"+$3_1[2]+"</a></div>"
+}
+function add(){
+if(d("add1").value=="")d("add1").value="about:blank";
+if(d("add2").value=="")d("add2").value="img/icons/default.png";
+if(d("add3").value=="")d("add3").value="新建书签";
+localStorage.bookmark+="|)(|"+d("add1").value+"|><|"+d("add2").value+"|><|"+d("add3").value;
+ale("成功添加书签<br>"+d("add3").value);
+}
+d("dan").onclick=function(){
+if($1[0]=="day"){$1[0]="night"}else{$1[0]="day"}
+save();
+}
+function buout(){
+alert("请在10秒内复制下面小红框中内容");
+ale("<input id='alertinput' type='text'>",10000);
+d("alertinput").value=localStorage.settings+"|}{|"+localStorage.bookmark0+"|}{|"+localStorage.bookmark;
+d("alertinput").select();
+} 
+function buin(){
+var backup0=prompt("请将备份输入此框,不输就按取消,不然会卡死");
+if(backup0!=null){
+backup1=backup0.split("|}{|");
+localStorage.settings=backup1[0];
+localStorage.bookmark0=backup1[1];
+localStorage.bookmark=backup1[2];
+alert("导入成功");
+if(confirm("是否现在刷新"))location.reload();
+}else{ale("取消导入成功")}}
+function buclear(){
+localStorage.settings="night$><$img/bg.png$><$http://www.baidu.com/s?word=$><$请输入搜索内容…$><$#000000$><$一句$><$#ffffff$><$0";
+localStorage.bookmark0="https://www.baidu.com/?from=1011440l|><|img/icons/baidu.png|><|百度一下|)(|https://www.google.com.hk/#spf=1|><|img/icons/google_app.png|><|谷歌搜索|)(|https://m.bilibili.com/index.html?bsource=bdts|><|img/icons/bilibilibog.png|><|哔哩哔哩|)(|https://m.youtube.com/|><|img/icons/youtube.png|><|youtube|)(|https://tieba.baidu.com/?page=like|><|img/icons/tieba.png|><|百度贴吧|)(|https://h5.m.taobao.com|><|img/icons/taobao.png|><|淘宝|)(|https://www.coolapk.com/|><|img/icons/cool_apk.png|><|酷安|)(|https://m.apkpure.com/cn/|><|img/icons/apkpure.png|><|apkpure";
+localStorage.bookmark="https://www.baidu.com/?from=1011440l|><|img/icons/baidu.png|><|百度一下";
+ale("重置完成");
+}
+//ale("脚本加载完毕",1000);
+
+</script>
+<script id="js" type="text/javascript" src="http://yiju.ml/api/word.php?m=js"></script>
+<script>if(d("set5").value=="一句"){document.title=str[0]}</script>
+</html>
